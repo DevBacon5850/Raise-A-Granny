@@ -1,0 +1,231 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Bacon Hub", "DarkTheme")
+--- Tabs & Sections
+local Tab = Window:NewTab("Main")
+local Section = Tab:NewSection("Main")
+Section:NewButton("Inf Money", "Click To Get Inf Money", function()
+    while task.wait() do
+        local event = game:GetService("ReplicatedStorage").cleanPoop
+        event:FireServer()
+        local event = game:GetService("ReplicatedStorage").SaveGame
+        event:FireServer()
+        end
+end)
+local Section = Tab:NewSection("Teleports")
+Section:NewButton("Main Room", "Click To Teleport To Main Room", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1.3802079, 5.24802399, 1.3329916, 5.01330987e-06, -4.55473259e-09, 1, 6.58296265e-11, 1, 4.55473215e-09, -1, 6.58067975e-11, 5.01330987e-06)
+end)
+Section:NewButton("Second Room", "Click To Teleport To Second Room", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(37.0764999, 5.24802494, -16.0417118, -0.018854253, -2.56105959e-09, -0.999822259, 1.83111515e-09, 1, -2.59604538e-09, 0.999822259, -1.87973614e-09, -0.018854253)
+end)
+Section:NewButton("Plant Room", "Click To Teleport To Plant Room", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(53.2119713, 5.24802399, 9.16897774, 0.999920964, -6.98686833e-08, -0.0125703262, 7.1024175e-08, 1, 9.14760037e-08, 0.0125703262, -9.23615744e-08, 0.999920964)
+end)
+Section:NewButton("Upstair Room", "Click To Teleport To Upstair Room", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0.715339959, 21.4993019, -0.144258752, 0.0251349565, 2.37334818e-10, 0.999684095, -2.70037881e-10, 1, -2.30620301e-10, -0.999684095, -2.64155919e-10, 0.0251349565)
+end)
+Section:NewButton("Courage Picture", "Click To Teleport To Courage Picture", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(54.1543617, 6.24803162, -22.1094532, 0.999758244, 3.94105335e-08, 0.0219867341, -3.8176367e-08, 1, -5.65521354e-08, -0.0219867341, 5.56990898e-08, 0.999758244)
+end)
+Section:NewButton("Secret Room", "Click To Teleport To Secret Room", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(71.2474823, 5.24802589, -18.5957832, 0.0282762367, 1.11821192e-08, 0.999600172, 9.70651115e-10, 1, -1.12140501e-08, -0.999600172, 1.28735411e-09, 0.0282762367)
+end)
+--- Misc
+local Tab = Window:NewTab("Misc")
+local Section = Tab:NewSection("Misc")
+Section:NewSlider("WalkSpeed", "Change Player's WalkSpeed", 500, 16, function(s)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+end)
+Section:NewSlider("JumpPower", "Change Player's JumpPower", 500, 50, function(jp)
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = jp
+end)
+local Section = Tab:NewSection("Others")
+Section:NewButton("Fly (R)", "Click Then Press E To Fly", function()
+    repeat wait() 
+	until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:findFirstChild("Head") and game.Players.LocalPlayer.Character:findFirstChild("Humanoid") 
+local mouse = game.Players.LocalPlayer:GetMouse() 
+repeat wait() until mouse
+local plr = game.Players.LocalPlayer 
+local torso = plr.Character.Head 
+local flying = false
+local deb = true 
+local ctrl = {f = 0, b = 0, l = 0, r = 0} 
+local lastctrl = {f = 0, b = 0, l = 0, r = 0} 
+local maxspeed = 400 
+local speed = 5000 
+
+function Fly() 
+local bg = Instance.new("BodyGyro", torso) 
+bg.P = 9e4 
+bg.maxTorque = Vector3.new(9e9, 9e9, 9e9) 
+bg.cframe = torso.CFrame 
+local bv = Instance.new("BodyVelocity", torso) 
+bv.velocity = Vector3.new(0,0.1,0) 
+bv.maxForce = Vector3.new(9e9, 9e9, 9e9) 
+repeat wait() 
+plr.Character.Humanoid.PlatformStand = true 
+if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then 
+speed = speed+.5+(speed/maxspeed) 
+if speed > maxspeed then 
+speed = maxspeed 
+end 
+elseif not (ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0) and speed ~= 0 then 
+speed = speed-1 
+if speed < 0 then 
+speed = 0 
+end 
+end 
+if (ctrl.l + ctrl.r) ~= 0 or (ctrl.f + ctrl.b) ~= 0 then 
+bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f+ctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l+ctrl.r,(ctrl.f+ctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed 
+lastctrl = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r} 
+elseif (ctrl.l + ctrl.r) == 0 and (ctrl.f + ctrl.b) == 0 and speed ~= 0 then 
+bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f+lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l+lastctrl.r,(lastctrl.f+lastctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed 
+else 
+bv.velocity = Vector3.new(0,0.1,0) 
+end 
+bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f+ctrl.b)*50*speed/maxspeed),0,0) 
+until not flying 
+ctrl = {f = 0, b = 0, l = 0, r = 0} 
+lastctrl = {f = 0, b = 0, l = 0, r = 0} 
+speed = 0 
+bg:Destroy() 
+bv:Destroy() 
+plr.Character.Humanoid.PlatformStand = false 
+end 
+mouse.KeyDown:connect(function(key) 
+if key:lower() == "r" then 
+if flying then flying = false 
+else 
+flying = true 
+Fly() 
+end 
+elseif key:lower() == "w" then 
+ctrl.f = 1 
+elseif key:lower() == "s" then 
+ctrl.b = -1 
+elseif key:lower() == "a" then 
+ctrl.l = -1 
+elseif key:lower() == "d" then 
+ctrl.r = 1 
+end 
+end) 
+mouse.KeyUp:connect(function(key) 
+if key:lower() == "w" then 
+ctrl.f = 0 
+elseif key:lower() == "s" then 
+ctrl.b = 0 
+elseif key:lower() == "a" then 
+ctrl.l = 0 
+elseif key:lower() == "d" then 
+ctrl.r = 0 
+end 
+end)
+Fly()
+end)
+Section:NewButton("Noclip (E)", "Click To Noclip", function()
+    local StealthMode = true -- If game has an anticheat that checks the logs
+
+    local Indicator
+    
+    if not StealthMode then
+        local ScreenGui = Instance.new("ScreenGui", game.CoreGui)
+        print("NOCLIP: Press E to Activate")
+        Indicator = Instance.new("TextLabel", ScreenGui)
+        Indicator.AnchorPoint = Vector2.new(0, 1)
+        Indicator.Position = UDim2.new(0, 0, 1, 0)
+        Indicator.Size = UDim2.new(0, 200, 0, 50)
+        Indicator.BackgroundTransparency = 1
+        Indicator.TextScaled = true
+        Indicator.TextStrokeTransparency = 0
+        Indicator.TextColor3 = Color3.new(0, 0, 0)
+        Indicator.TextStrokeColor3 = Color3.new(1, 1, 1)
+        Indicator.Text = "Noclip: Enabled"
+    end
+    
+    local noclip = false
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    
+    local mouse = player:GetMouse()
+    
+    mouse.KeyDown:Connect(function(key)
+        if key == "e" then
+            noclip = not noclip
+    
+            if not StealthMode then
+                Indicator.Text = "Noclip: " .. (noclip and "Enabled" or "Disabled")
+            end
+        end
+    end)
+    
+    while true do
+        player = game.Players.LocalPlayer
+        character = player.Character
+    
+        if noclip then
+            for _, v in pairs(character:GetDescendants()) do
+                pcall(function()
+                    if v:IsA("BasePart") then
+                        v.CanCollide = false
+                    end
+                end)
+            end
+        end
+    
+        game:GetService("RunService").Stepped:wait()
+    end
+end)
+Section:NewButton("Inf Jump", "Click To Inf Jump", function()
+    local Player = game:GetService'Players'.LocalPlayer;
+    local UIS = game:GetService'UserInputService';
+    
+    _G.JumpHeight = 50;
+        
+    function Action(Object, Function) if Object ~= nil then Function(Object); end end
+        
+    UIS.InputBegan:connect(function(UserInput)
+        if UserInput.UserInputType == Enum.UserInputType.Keyboard and UserInput.KeyCode == Enum.KeyCode.Space then
+            Action(Player.Character.Humanoid, function(self)
+                if self:GetState() == Enum.HumanoidStateType.Jumping or self:GetState() == Enum.HumanoidStateType.Freefall then
+                    Action(self.Parent.HumanoidRootPart, function(self)
+                        self.Velocity = Vector3.new(0, _G.JumpHeight, 0);
+                    end)
+                end
+            end)
+        end
+    end)
+end)
+local Section = Tab:NewSection("Select Player")
+players = {}
+
+for i,v in pairs(game:GetService("Players"):GetChildren()) do
+    table.insert(players,v.Name)
+end
+
+Section:NewDropdown("Select Player", "Click To Name", players, function(abc)
+      Select = abc
+end)
+Section:NewButton("Teleport", " ", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[Select].Character.HumanoidRootPart.CFrame
+end)
+
+--- GUI
+local Tab = Window:NewTab("GUI")
+local Section = Tab:NewSection("Hotkey")
+Section:NewKeybind("Hotkey", "Press Any Key To Hide GUI", Enum.KeyCode.F, function()
+	Library:ToggleUI()
+end)
+--- Credits
+local Tab = Window:NewTab("Credits")
+local Section = Tab:NewSection("Credits By Dev_Bacon")
+Section:NewButton("Discord - Bacon Hub", "Discord - Bacon Hub", function()
+    local b = Instance.new("BindableFunction")
+    function b.OnInvoke(response) if response == "Copy Link" then if setclipboard then setclipboard("https://discord.gg/WCES5ZtM") end end end
+    game:GetService("StarterGui"):SetCore("SendNotification", {Title = "Join discord server", Text = "Bacon Hub", Duration = 5, Callback = b, Button1 = "Copy Link"})
+end)
+local Section = Tab:NewSection("Youtube By Dev_Bacon")
+Section:NewButton("Youtube - Dev_Bacon", "Youtube - Dev_Bacon", function()
+    local b = Instance.new("BindableFunction")
+    function b.OnInvoke(response) if response == "Copy Link" then if setclipboard then setclipboard("https://www.youtube.com/channel/UCjuyjtQYk8lWeIfXoJmYzMA") end end end
+    game:GetService("StarterGui"):SetCore("SendNotification", {Title = "Subcribe To Dev_Bacon", Text = "Youtube - Dev Bacon", Duration = 5, Callback = b, Button1 = "Copy Link"})
+end)
